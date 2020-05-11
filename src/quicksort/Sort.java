@@ -21,42 +21,17 @@ public class Sort<T extends Comparable<T>> {
     public void sort(Secuencia<T> n, int start, int end) {
         this.iteraciones += n.toString()+"\n";
         int i = start;
-        /**
-         * Indice para iniciar la búsqueda desde la izquierda *
-         */
         int k = end;
-        /**
-         * Indice para iniciar la búsqueda desde la derecha *
-         */
         if ((end - start) >= 1) {
             T pivot = n.get(start);
-            /**
-             * Pivote para realizar la comparación, escogemos el primer elemento
-             * *
-             */
             while (i < k) {
-                /**
-                 * Mientas el índice izquierdo sea menor al derecho *
-                 */
                 while (n.get(i).compareTo(pivot) <= 0 && i < end && k > i) {
                     i++;
-                    /**
-                     * Recorriendo desde la izquierda nos ubicamos hasta
-                     * encontrar el primer elemento mayor al pivote *
-                     */
                 }
                 while (n.get(k).compareTo(pivot) > 0 && k >= start && k >= i) {
                     k--;
-                    /**
-                     * Recorriendo desde la derecha nos ubicamos hasta encontrar
-                     * el primer elemento menor al pivote *
-                     */
                 }
                 if (i < k) {
-                    /**
-                     * Si el índice izquierdo sigue siendo menor, intercambiamos
-                     * los elementos *
-                     */
                     intercambiar(n, i, k);
                 }
             }
@@ -66,9 +41,6 @@ public class Sort<T extends Comparable<T>> {
             sort(n, k + 1, end);
         } else {
             return;
-            /**
-             * Cuando solo quede por ordenar un elemento se sale de la función *
-             */
         }
     }
 

@@ -15,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import quicksort.NumerosAleatorios;
 import quicksort.Secuencia;
 import quicksort.Sort;
 
@@ -285,12 +286,16 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             int cantidad = Integer.parseInt(dato);
             if (cantidad > 0) {
+                NumerosAleatorios aleatorios = new NumerosAleatorios(1, 999);
+                int[] arreglo = new int[cantidad];
+                for(int i=0; i<cantidad; i++){
+                    arreglo[i] = aleatorios.getRandom();
+                }
                 this.secuencia = new Secuencia(cantidad + 1);
                 this.mensaje += "Arreglo Generado Aleatoriamente: \n";
-                for (int i = 0; i < cantidad; i++) {
-                    int num = (int) Math.floor(Math.random() * (100 - 1 + 1) + 1);
-                    this.secuencia.insertar(num);
-                    this.mensaje += num + " | ";
+                for (int i = 0; i < arreglo.length; i++) {
+                    this.secuencia.insertar(arreglo[i]);
+                    this.mensaje += arreglo[i] + " | ";
                 }
                 this.txtArea.setText(mensaje);
                 this.cmdResolver.setEnabled(true);
@@ -335,7 +340,7 @@ public class Inicio extends javax.swing.JFrame {
             File file = chooser.getSelectedFile();
             ruta = file.toString();
             try {
-                FileOutputStream pdf = new FileOutputStream(ruta+".pdf");
+                FileOutputStream pdf = new FileOutputStream(ruta + ".pdf");
                 Document doc = new Document();
                 PdfWriter.getInstance(doc, pdf);
                 Date date = new Date();
@@ -351,7 +356,7 @@ public class Inicio extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Se ha generado el archivo pdf exitosamente", "Archivo Generado", JOptionPane.PLAIN_MESSAGE, icono2);
                 this.cmdExportar.setEnabled(false);
                 ProcessBuilder p = new ProcessBuilder();
-                p.command("cmd.exe","/c",ruta+".pdf");
+                p.command("cmd.exe", "/c", ruta + ".pdf");
                 p.start();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getStackTrace(), "ERROR", JOptionPane.ERROR_MESSAGE);

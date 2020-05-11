@@ -19,6 +19,7 @@ public class Sort<T extends Comparable<T>> {
     }
 
     public void sort(Secuencia<T> n, int start, int end) {
+        this.iteraciones += n.toString()+"\n";
         int i = start;
         /**
          * Indice para iniciar la búsqueda desde la izquierda *
@@ -56,17 +57,13 @@ public class Sort<T extends Comparable<T>> {
                      * Si el índice izquierdo sigue siendo menor, intercambiamos
                      * los elementos *
                      */
-                    this.iteraciones += n.toString()+"\n";
                     intercambiar(n, i, k);
                 }
             }
-            this.iteraciones += n.toString()+"\n";
+            
             intercambiar(n, start, k);
-            this.iteraciones += n.toString()+"\n";
             sort(n, start, k - 1);
-            this.iteraciones += n.toString()+"\n";
             sort(n, k + 1, end);
-            this.iteraciones += n.toString()+"\n";
         } else {
             return;
             /**
